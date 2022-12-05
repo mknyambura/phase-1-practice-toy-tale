@@ -1,3 +1,5 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+
 body {
   margin: 0;
   font-family: monospace;
@@ -87,8 +89,6 @@ button:hover {
   border: #e04b52 solid 1px;
   color: #e04b52;
 }
-
-
 .input-text {
   border-radius: 5px;
   height: 2rem;
@@ -96,4 +96,24 @@ button:hover {
   font-size: 18px;
   font-family: monospace;
   margin: 3px;
+}
+.toy {
+  align-items: center;
+  width: 60%;
+  height: 50%;
+}
+.buttons {
+  /* bottom: 10px; */
+  flex-direction: column;
+}
+.content p {
+  font-size: 16px;
+  font-weight: 900;
+}
+.content h3 {
+  font-weight: 900;
+  font-size: 22px;
+}
+#toy-collection {
+  flex-direction: row;
 }
