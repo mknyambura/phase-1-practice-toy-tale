@@ -14,88 +14,67 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+function renderOneToy(toy){
+    let card = document.createElement('div')
+    card.className = 'card'
+    card.innerHTML = `
+        <div class = "content">
+            <h3>${toy.name}</h3>
+            <img class = "toy" src = "${toy.image}">
+            <p class = 'likes-count'>Likes: ${toy.likes}</p>
+        </div>
+        <div class = "buttons">
+            <button id='like-button'>Like</button>
+        </div>`
 
+    document.querySelector('#toy-collection').appendChild(card)
+    card.querySelector('#like-button').addEventListener('click', function(){
+        toy.likes += 1
+        card.querySelector('.likes-count').textContent = `Likes: ${toy.likes}`
+    })
+}
 function getAllToys(){
-  fetch('http://localhost:3333/toys')
-    .then(res => console.log(res))
-    // .then(response =>  response.json())
-    // .then(toyData => toyData.forEach(toy => renderOneToy(toy)))
+    fetch('http://localhost:3333/toys')
+      .then((response) =>  response.json())
+      .then(data => data.forEach(toy => renderOneToy(toy)))
+    //   .then(data => console.log(data))
+      console.log("Before fetch")
+}
+
+function submitNewToy(e){
+    e.preventDefault()
+    let toyObject = {
+        name: e.target.name.value,
+        image: e.target.image.value,
+        likes: 0
+    }
+    renderOneToy(toyObject)
+    createNewToy(toyObject)
+}
+function createNewToy(toyObject){
+    fetch('http://localhost:3333/toys', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(toyObject)
+    })
+}
+
+function updateLikes(toyObject){
+    fetch('http://localhost:3333/toys/${toyObject.id}', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(toyObject)
+    })
 }
 function initialize(){
-  getAllToys();
+    getAllToys();
+    createNewToy();
+    console.log("After fetch")
 }
 initialize();
-
-// // document.querySelector('.submit').addEventListener('submit', newToy);
-
-// // function newToy(event){
-// //   event.preventDefault()
-
-// //   const addNewToy = {
-// //     name: event.target.name.value,
-// //     image: event.target.image.value,
-// //     likes: 0
-// //   }
-  
-// //   renderOneToy(addNewToy)
-// //   createToy(addNewToy)
-// // }
-
-
-// function renderOneToy(toys){
-//   const collection = document.querySelector("#toy-collection");
-//   const card = document.createElement('div')
-//   card.className = 'card'
-//   card.innerHTML = `
-//   <p>${toys.likes} Likes</p> 
-//   <button class="like-button" id="${toys.id}">Like ❤️</button>`
-  
-//   card.querySelector('.like-button').addEventListener('click', function(){
-//     toys.likes += 1
-//     card.querySelector('p').textContent = toys.likes
-//     updateLikesCounts(toys)
-//   })
-//   collection.appendChild(card)
-  
-//   const name = document.createElement('h2');
-//   name.className = toys.name;
-//   card.appendChild(name);
-
-//   const image = document.createElement('img')
-//   image.src = toys.image;
-//   image.className = 'toy-image';
-//   card.appendChild(image)
-  
-//   const likes = document.createElement('p')
-//   likes.className = toys.likes
-//   card.appendChild(likes)
-
-//   document.querySelector('.like-button').appendChild(card)
-  
-// }
-
-// function createToy(addNewToy){
-//   const toyObject = {
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     method: "POST",
-//     body: JSON.stringify(addNewToy)
-//   }
-//   fetch('http://localhost:4000/toys', toyObject)
-//     // .then(resp => resp.json)
-//     // .then(renderOneToy)
-// }
-
-
-// function updateLikesCounts(addNewToy){
-//   fetch("http://localhost:4000/toys/${toyObj.id}", {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Accept: 'application/json'
-//     },
-//     body: JSON.stringify(addNewToy)
-//   })
-// }
-
