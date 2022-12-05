@@ -103,7 +103,7 @@ button:hover {
   height: 50%;
 }
 .buttons {
-  /* bottom: 10px; */
+  /* bottom: 0; */
   flex-direction: column;
 }
 .content p {

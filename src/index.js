@@ -49,32 +49,32 @@ function submitNewToy(e){
         likes: 0
     }
     renderOneToy(toyObject)
-    createNewToy(toyObject)
+    // createNewToy(toyObject)
 }
-function createNewToy(toyObject){
-    fetch('http://localhost:3333/toys', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify(toyObject)
-    })
-}
+// function createNewToy(toyObject){
+//     fetch('http://localhost:3333/toys', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             Accept: 'application/json'
+//         },
+//         body: JSON.stringify(toyObject)
+//     })
+// }
 
-function updateLikes(toyObject){
-    fetch('http://localhost:3333/toys/${toyObject.id}', {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-        },
-        body: JSON.stringify(toyObject)
-    })
-}
+// function updateLikes(toyObject){
+//     fetch('http://localhost:3333/toys/${toyObject.id}', {
+//         method: 'PATCH',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             Accept: 'application/json'
+//         },
+//         body: JSON.stringify(toyObject)
+//     })
+// }
 function initialize(){
     getAllToys();
-    createNewToy();
+    // createNewToy();
     console.log("After fetch")
 }
 initialize();
